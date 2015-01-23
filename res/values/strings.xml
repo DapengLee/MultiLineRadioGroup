@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">MultiLineRadioGroup</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <string-array name="childvalues">
+        <item>child1</item>
+        <item>child2</item>
+        <item>childchild3</item>
+        <item>child4</item>
+        <item>childchild5</item>
+        <item>childchildchild6</item>
+        <item>child7</item>
+        <item>child8</item>
+    </string-array>
+
+</resources>
