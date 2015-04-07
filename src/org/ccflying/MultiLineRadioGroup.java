@@ -95,12 +95,22 @@ public class MultiLineRadioGroup extends ViewGroup implements OnClickListener {
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
 		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 		childCount = getChildCount();
+		int flagX = 0, flagY = 0, sheight = 0;
 		if (childCount > 0) {
 			for (int i = 0; i < childCount; i++) {
 				View v = getChildAt(i);
 				measureChild(v, widthMeasureSpec, heightMeasureSpec);
+				if (v.getMeasuredWidth() + childMarginHorizontal * 2 + flagX > getMeasuredWidth()) {
+					flagY++;
+					flagX = 0;
+				}
+				sheight = v.getMeasuredHeight();
+				flagX += v.getMeasuredWidth() + childMarginHorizontal * 2;
 			}
 		}
+		int height = (flagY + 1) * (sheight + childMarginVertical)
+				+ childMarginVertical + getPaddingBottom() + getPaddingTop();
+		setMeasuredDimension(getMeasuredWidth(), height);
 	}
 
 	@Override
@@ -109,7 +119,6 @@ public class MultiLineRadioGroup extends ViewGroup implements OnClickListener {
 			Log.d("tag", "onLayout:unChanged");
 			return;
 		}
-		mX = mY = 0;
 		childCount = getChildCount();
 		if (childCount > 0) {
 			for (int i = 0; i < childCount; i++) {
@@ -126,6 +135,7 @@ public class MultiLineRadioGroup extends ViewGroup implements OnClickListener {
 				mX += v.getMeasuredWidth() + childMarginHorizontal * 2;
 			}
 		}
+		mX = mY = 0;
 		forceLayout = false;
 	}
 

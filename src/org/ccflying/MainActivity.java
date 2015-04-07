@@ -3,6 +3,7 @@ package org.ccflying;
 import org.ccflying.MultiLineRadioGroup.OnCheckedChangedListener;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -27,6 +28,7 @@ public class MainActivity extends Activity implements OnClickListener,
 		findViewById(R.id.insert).setOnClickListener(this);
 		findViewById(R.id.remove).setOnClickListener(this);
 		findViewById(R.id.setChecked).setOnClickListener(this);
+		findViewById(R.id.showinlist).setOnClickListener(this);
 		mInput = (EditText) findViewById(R.id.insert_position);
 		group = (MultiLineRadioGroup) findViewById(R.id.content);
 		group.setOnCheckChangedListener(this);
@@ -108,6 +110,9 @@ public class MainActivity extends Activity implements OnClickListener,
 							Toast.LENGTH_SHORT).show();
 				}
 			}
+			break;
+		case R.id.showinlist:
+			startActivity(new Intent(this, ListAty.class));
 			break;
 		}
 	}

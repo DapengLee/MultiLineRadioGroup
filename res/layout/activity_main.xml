@@ -8,8 +8,7 @@
     <org.ccflying.MultiLineRadioGroup
         android:id="@+id/content"
         android:layout_width="match_parent"
-        android:layout_height="0.0dip"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
         app:child_count="8"
         app:child_layout="@layout/child"
         app:child_margin_horizontal="6.0dip"
@@ -90,5 +89,11 @@
                 android:text="setChecked" />
         </LinearLayout>
     </HorizontalScrollView>
+
+    <Button
+        android:id="@+id/showinlist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="showListView" />
 
 </LinearLayout>
