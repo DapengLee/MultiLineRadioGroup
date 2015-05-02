@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -21,13 +22,6 @@ public class MainActivity extends Activity implements OnClickListener,
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		findViewById(R.id.append).setOnClickListener(this);
-		findViewById(R.id.clearchecked).setOnClickListener(this);
-		findViewById(R.id.getchecked).setOnClickListener(this);
-		findViewById(R.id.toggleMode).setOnClickListener(this);
-		findViewById(R.id.insert).setOnClickListener(this);
-		findViewById(R.id.remove).setOnClickListener(this);
-		findViewById(R.id.setChecked).setOnClickListener(this);
 		findViewById(R.id.showinlist).setOnClickListener(this);
 		mInput = (EditText) findViewById(R.id.insert_position);
 		group = (MultiLineRadioGroup) findViewById(R.id.content);
@@ -36,23 +30,16 @@ public class MainActivity extends Activity implements OnClickListener,
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-		}
-		return super.onOptionsItemSelected(item);
-	}
-
-	@Override
-	public void onClick(View v) {
 		int j = -1;
-		switch (v.getId()) {
+		int id = item.getItemId();
+		switch (id) {
 		case R.id.append:
-			group.append("Append>>" + group.getChildCount());
+			group.append("append " + group.getChildCount());
 			break;
-		case R.id.clearchecked:
+		case R.id.clearChecked:
 			group.clearChecked();
 			break;
-		case R.id.getchecked:
+		case R.id.getCheckedItems:
 			int[] cs = group.getCheckedItems();
 			if (cs == null || cs.length == 0) {
 				Toast.makeText(this, "none checked current!",
@@ -65,27 +52,6 @@ public class MainActivity extends Activity implements OnClickListener,
 				Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
 			}
 			break;
-		case R.id.toggleMode:
-			if (group.isSingleChoice()) {
-				group.setChoiceMode(false);
-			} else {
-				group.setChoiceMode(true);
-			}
-			break;
-		case R.id.insert:
-			j = getFunkIndex();
-			if (j >= 0) {
-				boolean bl = group.insert(j,
-						"Inserted>" + group.getChildCount());
-				if (bl) {
-					Toast.makeText(this, "Inserted child at " + j,
-							Toast.LENGTH_SHORT).show();
-				} else {
-					Toast.makeText(this, "Invalid position!",
-							Toast.LENGTH_SHORT).show();
-				}
-			}
-			break;
 		case R.id.remove:
 			j = getFunkIndex();
 			if (j >= 0) {
@@ -94,9 +60,29 @@ public class MainActivity extends Activity implements OnClickListener,
 					Toast.makeText(this, "Child " + j + " removed!",
 							Toast.LENGTH_SHORT).show();
 				} else {
-					Toast.makeText(this, "Invalid position!",
+					Toast.makeText(this, "Invalid Position!",
 							Toast.LENGTH_SHORT).show();
 				}
+			}
+			break;
+		case R.id.insert:
+			j = getFunkIndex();
+			if (j >= 0) {
+				boolean bl = group.insert(j, "insert " + group.getChildCount());
+				if (bl) {
+					Toast.makeText(this, "insert a child at " + j,
+							Toast.LENGTH_SHORT).show();
+				} else {
+					Toast.makeText(this, "Invalid Position!",
+							Toast.LENGTH_SHORT).show();
+				}
+			}
+			break;
+		case R.id.toggleMode:
+			if (group.isSingleChoice()) {
+				group.setChoiceMode(false);
+			} else {
+				group.setChoiceMode(true);
 			}
 			break;
 		case R.id.setChecked:
@@ -111,6 +97,19 @@ public class MainActivity extends Activity implements OnClickListener,
 				}
 			}
 			break;
+		}
+		return super.onOptionsItemSelected(item);
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.main, menu);
+		return super.onCreateOptionsMenu(menu);
+	}
+
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
 		case R.id.showinlist:
 			startActivity(new Intent(this, ListAty.class));
 			break;
@@ -128,7 +127,8 @@ public class MainActivity extends Activity implements OnClickListener,
 	}
 
 	@Override
-	public void onItemChecked(MultiLineRadioGroup group, int position) {
+	public void onItemChecked(MultiLineRadioGroup group, int position,
+			boolean checked) {
 		Log.e("MainActivity", "poi:" + position);
 	}
 }

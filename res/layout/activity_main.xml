@@ -12,88 +12,25 @@
         app:child_count="8"
         app:child_layout="@layout/child"
         app:child_margin_horizontal="6.0dip"
-        app:child_margin_vertical="2.0dip"
+        app:child_margin_vertical="4.0dip"
         app:child_values="@array/childvalues"
         app:single_choice="true" >
     </org.ccflying.MultiLineRadioGroup>
 
-    <HorizontalScrollView
+    <EditText
+        android:id="@+id/insert_position"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal" >
-
-            <Button
-                android:id="@+id/append"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="append" />
-
-            <Button
-                android:id="@+id/clearchecked"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="clearChecked" />
-
-            <Button
-                android:id="@+id/getchecked"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="getCheckedItems" />
-
-            <Button
-                android:id="@+id/toggleMode"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="toggleChoiceMode" />
-        </LinearLayout>
-    </HorizontalScrollView>
-
-    <HorizontalScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal" >
-
-            <EditText
-                android:id="@+id/insert_position"
-                android:layout_width="42.0dip"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:inputType="number"
-                android:lines="1"
-                android:maxLines="1" />
-
-            <Button
-                android:id="@+id/insert"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="insert" />
-
-            <Button
-                android:id="@+id/remove"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="remove" />
-
-            <Button
-                android:id="@+id/setChecked"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="setChecked" />
-        </LinearLayout>
-    </HorizontalScrollView>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="46.0dip"
+        android:gravity="center"
+        android:inputType="number"
+        android:lines="1"
+        android:maxLines="1" />
 
     <Button
         android:id="@+id/showinlist"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="showListView" />
+        android:text="ShowListViewMode" />
 
 </LinearLayout>

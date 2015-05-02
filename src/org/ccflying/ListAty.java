@@ -13,6 +13,7 @@ import android.widget.ListView;
 public class ListAty extends Activity {
 	private ListView lv;
 	private List<String> list;
+	private List<String> list1;
 	private Adapter adapter;
 
 	@Override
@@ -21,9 +22,12 @@ public class ListAty extends Activity {
 		setContentView(R.layout.aty_list);
 		lv = (ListView) findViewById(R.id.lv);
 		list = new ArrayList<String>();
+		list1 = new ArrayList<String>();
 		list.add("A");
 		list.add("B");
 		list.add("C");
+		list1.add("D");
+		list1.add("E");
 		adapter = new Adapter();
 		lv.setAdapter(adapter);
 	}
@@ -32,7 +36,7 @@ public class ListAty extends Activity {
 
 		@Override
 		public int getCount() {
-			return 1;
+			return 2;
 		}
 
 		@Override
@@ -50,7 +54,11 @@ public class ListAty extends Activity {
 			View v = getLayoutInflater().inflate(R.layout.list_item, null);
 			MultiLineRadioGroup rg = (MultiLineRadioGroup) v
 					.findViewById(R.id.content);
-			rg.addAll(list);
+			if (position == 0) {
+				rg.addAll(list);
+			} else {
+				rg.addAll(list1);
+			}
 			return v;
 		}
 	}

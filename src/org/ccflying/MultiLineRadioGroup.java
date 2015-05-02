@@ -145,8 +145,8 @@ public class MultiLineRadioGroup extends ViewGroup implements OnClickListener {
 
 	@Override
 	public void onClick(View v) {
-		if (singleChoice) {
-			try {
+		try {
+			if (singleChoice) { // singleChoice
 				int i = (Integer) v.getTag();
 				if (mLastCheckedPosition == i) {
 					return;
@@ -157,12 +157,16 @@ public class MultiLineRadioGroup extends ViewGroup implements OnClickListener {
 				}
 				mLastCheckedPosition = i;
 				if (listener != null) {
-					listener.onItemChecked(this, i);
+					listener.onItemChecked(this, i, true);
 				}
-			} catch (Exception e) {
+			} else { // multiChoice
+				int i = (Integer) v.getTag();
+				CheckBox cb = (CheckBox) v;
+				if (null != listener) {
+					listener.onItemChecked(this, i, cb.isChecked());
+				}
 			}
-		} else { // multiChoice
-
+		} catch (Exception e) {
 		}
 	}
 
@@ -180,6 +184,7 @@ public class MultiLineRadioGroup extends ViewGroup implements OnClickListener {
 						&& mLastCheckedPosition < viewList.size()) {
 					viewList.get(mLastCheckedPosition).setChecked(false);
 				}
+				mLastCheckedPosition = position;
 			}
 			viewList.get(position).setChecked(true);
 			return true;
@@ -330,7 +335,18 @@ public class MultiLineRadioGroup extends ViewGroup implements OnClickListener {
 		}
 	}
 
+	@Override
+	public void setEnabled(boolean enabled) {
+		super.setEnabled(enabled);
+		if (null != viewList && viewList.size() > 0) {
+			for (View v : viewList) {
+				v.setEnabled(enabled);
+			}
+		}
+	}
+
 	public interface OnCheckedChangedListener {
-		public void onItemChecked(MultiLineRadioGroup group, int position);
+		public void onItemChecked(MultiLineRadioGroup group, int position,
+				boolean checked);
 	}
 }
