@@ -17,6 +17,7 @@ public class MainActivity extends Activity implements OnClickListener,
 		OnCheckedChangedListener {
 	private MultiLineRadioGroup group;
 	private EditText mInput;
+	private int gravity = 0;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -96,6 +97,14 @@ public class MainActivity extends Activity implements OnClickListener,
 							Toast.LENGTH_SHORT).show();
 				}
 			}
+			break;
+		case R.id.setgravity:
+			if (gravity == 0) {
+				gravity = 1;
+			} else {
+				gravity = 0;
+			}
+			group.setGravity(gravity);
 			break;
 		}
 		return super.onOptionsItemSelected(item);

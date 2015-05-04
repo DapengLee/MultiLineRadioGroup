@@ -16,6 +16,8 @@ import android.widget.CheckBox;
 
 // org.ccflying.MultiLineRadioGroup
 public class MultiLineRadioGroup extends ViewGroup implements OnClickListener {
+	public final int LEFT = 1;
+	public final int CENTER = 0;
 	private int mX, mY;
 	private List<CheckBox> viewList;
 	private int childMarginHorizontal = 0;
@@ -25,6 +27,8 @@ public class MultiLineRadioGroup extends ViewGroup implements OnClickListener {
 	private int childValuesId = 0;
 	private boolean singleChoice = false;
 	private int mLastCheckedPosition = -1;
+	private int rowNumber = 0;
+	private int gravity = LEFT;
 	private OnCheckedChangedListener listener;
 	private List<String> childValues;
 	private boolean forceLayout;
@@ -47,6 +51,7 @@ public class MultiLineRadioGroup extends ViewGroup implements OnClickListener {
 				R.styleable.MultiLineRadioGroup_single_choice, true);
 		childValuesId = arr.getResourceId(
 				R.styleable.MultiLineRadioGroup_child_values, 0);
+		gravity = arr.getInt(R.styleable.MultiLineRadioGroup_gravity, LEFT);
 		if (childResId == 0) {
 			throw new RuntimeException(
 					"The attr 'child_layout' must be specified!");
@@ -109,6 +114,7 @@ public class MultiLineRadioGroup extends ViewGroup implements OnClickListener {
 				sheight = v.getMeasuredHeight();
 				flagX += v.getMeasuredWidth() + childMarginHorizontal * 2;
 			}
+			rowNumber = flagY;
 		}
 		int height = (flagY + 1) * (sheight + childMarginVertical)
 				+ childMarginVertical + getPaddingBottom() + getPaddingTop();
@@ -122,7 +128,25 @@ public class MultiLineRadioGroup extends ViewGroup implements OnClickListener {
 			return;
 		}
 		childCount = getChildCount();
+		int[] sX = new int[rowNumber + 1];
 		if (childCount > 0) {
+			if (gravity == CENTER) {
+				for (int i = 0; i < childCount; i++) {
+					View v = getChildAt(i);
+					int w = v.getMeasuredWidth() + childMarginHorizontal * 2
+							+ mX + getPaddingLeft() + getPaddingRight();
+					if (w > getWidth()) {
+						sX[mY] = (getWidth() - mX) / 2;
+						mY++;
+						mX = 0;
+					}
+					mX += v.getMeasuredWidth() + childMarginHorizontal * 2;
+					if (i == childCount - 1) {
+						sX[mY] = (getWidth() - mX) / 2;
+					}
+				}
+				mX = mY = 0;
+			}
 			for (int i = 0; i < childCount; i++) {
 				View v = getChildAt(i);
 				int w = v.getMeasuredWidth() + childMarginHorizontal * 2 + mX
@@ -131,7 +155,8 @@ public class MultiLineRadioGroup extends ViewGroup implements OnClickListener {
 					mY++;
 					mX = 0;
 				}
-				int startX = mX + childMarginHorizontal + getPaddingLeft();
+				int startX = mX + childMarginHorizontal + getPaddingLeft()
+						+ sX[mY];
 				int startY = mY * v.getMeasuredHeight() + (mY + 1)
 						* childMarginVertical;
 				v.layout(startX, startY, startX + v.getMeasuredWidth(), startY
@@ -190,6 +215,12 @@ public class MultiLineRadioGroup extends ViewGroup implements OnClickListener {
 			return true;
 		}
 		return false;
+	}
+
+	public void setGravity(int gravity) {
+		this.gravity = gravity;
+		forceLayout = true;
+		requestLayout();
 	}
 
 	public boolean isSingleChoice() {

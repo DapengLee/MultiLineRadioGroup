@@ -18,13 +18,13 @@ RadioGroup with multiLine (多行的RadioGroup)
     <org.ccflying.MultiLineRadioGroup
         android:id="@+id/content"
         android:layout_width="match_parent"
-        android:layout_height="0.0dip"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
         app:child_count="8"
         app:child_layout="@layout/child"
         app:child_margin_horizontal="6.0dip"
         app:child_margin_vertical="2.0dip"
         app:child_values="@array/childvalues"
+        app:gravity="1"
         app:single_choice="true" >
     </org.ccflying.MultiLineRadioGroup>
 </LinearLayout>
@@ -42,11 +42,12 @@ RadioGroup with multiLine (多行的RadioGroup)
 
 3.指定其它属性
 
-    child_count : 指定child个数;
+    child_count : 指定默认child个数;
     child_margin_horizontal : 指定child水平间距;
     child_margin_vertical : 指定child垂直间距;
     child_values : 指定child的textArray值(一个string-array);
     single_choice : 单选或多选;
+    gravity : 对齐方式   1(LEFT) 0(CENTER);
 
 4.部分方法
   *  append(String str) 附加一个child;
@@ -54,6 +55,7 @@ RadioGroup with multiLine (多行的RadioGroup)
   *  getCheckedValues()|getCheckedItems() 获取选中项;
   *  remove(int position) 删除指定位置的child;
   *  setItemChecked(int position) 选中指定位置的child;
+  *  setGravity(int gravity) 设定child的对齐方式(LEFT/CENTER);
   *  ...
 
 

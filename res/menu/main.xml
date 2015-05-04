@@ -34,9 +34,14 @@
         android:title="clearChecked">
     </item>
     <item
+        android:id="@+id/setgravity"
+        android:showAsAction="never"
+        android:title="setGravity">
+    </item>
+    <item
         android:id="@+id/toggleMode"
         android:showAsAction="never"
-        android:title="toggleMode">
+        android:title="toggleChoiceMode">
     </item>
 
 </menu>

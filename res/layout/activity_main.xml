@@ -9,11 +9,14 @@
         android:id="@+id/content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="10.0dip"
+        android:layout_marginRight="10.0dip"
         app:child_count="8"
         app:child_layout="@layout/child"
         app:child_margin_horizontal="6.0dip"
-        app:child_margin_vertical="4.0dip"
+        app:child_margin_vertical="6.0dip"
         app:child_values="@array/childvalues"
+        app:gravity="0"
         app:single_choice="true" >
     </org.ccflying.MultiLineRadioGroup>
 

@@ -8,6 +8,7 @@
         <attr name="child_count" format="integer" />
         <attr name="child_values" format="integer" />
         <attr name="single_choice" format="boolean" />
+        <attr name="gravity" format="integer" />
     </declare-styleable>
 
 </resources>
