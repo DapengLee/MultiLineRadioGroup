@@ -99,15 +99,30 @@ public class MainActivity extends Activity implements OnClickListener,
 			}
 			break;
 		case R.id.setgravity:
-			if (gravity == 0) {
+			if (gravity == 0) { // center
 				gravity = 1;
-			} else {
+			} else if (gravity == 2) { // right
 				gravity = 0;
+			} else { // left
+				gravity = 2;
 			}
 			group.setGravity(gravity);
 			break;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+
+	@Override
+	public boolean onPrepareOptionsMenu(Menu menu) {
+		MenuItem mi = menu.findItem(R.id.setgravity);
+		if (gravity == 0) { // center
+			mi.setTitle("setGravity(Left)");
+		} else if (gravity == 2) { // right
+			mi.setTitle("setGravity(Center)");
+		} else { // left
+			mi.setTitle("setGravity(Right)");
+		}
+		return super.onPrepareOptionsMenu(menu);
 	}
 
 	@Override

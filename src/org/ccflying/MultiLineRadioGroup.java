@@ -18,6 +18,7 @@ import android.widget.CheckBox;
 public class MultiLineRadioGroup extends ViewGroup implements OnClickListener {
 	public final int LEFT = 1;
 	public final int CENTER = 0;
+	public final int RIGHT = 2;
 	private int mX, mY;
 	private List<CheckBox> viewList;
 	private int childMarginHorizontal = 0;
@@ -130,19 +131,27 @@ public class MultiLineRadioGroup extends ViewGroup implements OnClickListener {
 		childCount = getChildCount();
 		int[] sX = new int[rowNumber + 1];
 		if (childCount > 0) {
-			if (gravity == CENTER) {
+			if (gravity != LEFT) {
 				for (int i = 0; i < childCount; i++) {
 					View v = getChildAt(i);
 					int w = v.getMeasuredWidth() + childMarginHorizontal * 2
 							+ mX + getPaddingLeft() + getPaddingRight();
 					if (w > getWidth()) {
-						sX[mY] = (getWidth() - mX) / 2;
+						if (gravity == CENTER) {
+							sX[mY] = (getWidth() - mX) / 2;
+						} else { // right
+							sX[mY] = (getWidth() - mX);
+						}
 						mY++;
 						mX = 0;
 					}
 					mX += v.getMeasuredWidth() + childMarginHorizontal * 2;
 					if (i == childCount - 1) {
-						sX[mY] = (getWidth() - mX) / 2;
+						if (gravity == CENTER) {
+							sX[mY] = (getWidth() - mX) / 2;
+						} else { // right
+							sX[mY] = (getWidth() - mX);
+						}
 					}
 				}
 				mX = mY = 0;

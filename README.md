@@ -47,7 +47,7 @@ RadioGroup with multiLine (多行的RadioGroup)
     child_margin_vertical : 指定child垂直间距;
     child_values : 指定child的textArray值(一个string-array);
     single_choice : 单选或多选;
-    gravity : 对齐方式   1(LEFT) 0(CENTER);
+    gravity : 对齐方式    1(left) 0(center) 2(right);
 
 4.部分方法
   *  append(String str) 附加一个child;
@@ -55,7 +55,7 @@ RadioGroup with multiLine (多行的RadioGroup)
   *  getCheckedValues()|getCheckedItems() 获取选中项;
   *  remove(int position) 删除指定位置的child;
   *  setItemChecked(int position) 选中指定位置的child;
-  *  setGravity(int gravity) 设定child的对齐方式(LEFT/CENTER);
+  *  setGravity(int gravity) 设定child的对齐方式(left|right|center);
   *  ...
 
 
