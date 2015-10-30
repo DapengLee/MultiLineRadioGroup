@@ -67,12 +67,7 @@ public class MultiLineRadioGroup extends ViewGroup implements OnClickListener {
 		if (childCount > 0) {
 			boolean hasValues = childValues != null;
 			for (int i = 0; i < childCount; i++) {
-				View v = LayoutInflater.from(context).inflate(childResId, null);
-				if (!(v instanceof CheckBox)) {
-					throw new RuntimeException(
-							"The attr child_layout's root must be a CheckBox!");
-				}
-				CheckBox cb = (CheckBox) v;
+				CheckBox cb = getChild();
 				viewList.add(cb);
 				addView(cb);
 				if (hasValues && i < childValues.size()) {
@@ -282,12 +277,7 @@ public class MultiLineRadioGroup extends ViewGroup implements OnClickListener {
 	}
 
 	public int append(String str) {
-		View v = LayoutInflater.from(getContext()).inflate(childResId, null);
-		if (!(v instanceof CheckBox)) {
-			throw new RuntimeException(
-					"The attr child_layout's root must be a CheckBox!");
-		}
-		CheckBox cb = (CheckBox) v;
+		CheckBox cb = getChild();
 		cb.setText(str);
 		cb.setTag(childCount);
 		cb.setOnClickListener(this);
@@ -335,12 +325,7 @@ public class MultiLineRadioGroup extends ViewGroup implements OnClickListener {
 		if (position < 0 || position > viewList.size()) {
 			return false;
 		}
-		View v = LayoutInflater.from(getContext()).inflate(childResId, null);
-		if (!(v instanceof CheckBox)) {
-			throw new RuntimeException(
-					"The attr child_layout's root must be a CheckBox!");
-		}
-		CheckBox cb = (CheckBox) v;
+		CheckBox cb = getChild();
 		cb.setText(str);
 		cb.setTag(position);
 		cb.setOnClickListener(this);
@@ -357,6 +342,17 @@ public class MultiLineRadioGroup extends ViewGroup implements OnClickListener {
 		}
 		postInvalidate();
 		return true;
+	}
+
+	private CheckBox getChild() {
+		View v = LayoutInflater.from(getContext()).inflate(childResId, this,
+				false);
+		if (!(v instanceof CheckBox)) {
+			throw new RuntimeException(
+					"The attr child_layout's root must be a CheckBox!");
+		}
+		CheckBox cb = (CheckBox) v;
+		return cb;
 	}
 
 	public void clearChecked() {
