@@ -153,6 +153,6 @@ public class MainActivity extends Activity implements OnClickListener,
 	@Override
 	public void onItemChecked(MultiLineRadioGroup group, int position,
 			boolean checked) {
-		Log.e("MainActivity", "poi:" + position);
+		Log.e("MainActivity", "position:" + position);
 	}
 }
