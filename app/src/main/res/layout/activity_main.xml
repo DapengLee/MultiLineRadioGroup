@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <org.ccflying.MultiLineRadioGroup
         android:id="@+id/content"
@@ -17,8 +17,7 @@
         app:child_margin_vertical="6.0dip"
         app:child_values="@array/childvalues"
         app:gravity="0"
-        app:single_choice="true" >
-    </org.ccflying.MultiLineRadioGroup>
+        app:single_choice="true"></org.ccflying.MultiLineRadioGroup>
 
     <EditText
         android:id="@+id/insert_position"

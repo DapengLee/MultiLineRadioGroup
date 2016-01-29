@@ -178,6 +178,9 @@ public class MultiLineRadioGroup extends ViewGroup implements OnClickListener {
             if (singleChoice) { // singleChoice
                 int i = (Integer) v.getTag();
                 boolean checked = ((CheckBox) v).isChecked();
+                if (mLastCheckedPosition != -1 && mLastCheckedPosition != i) {
+                    viewList.get(mLastCheckedPosition).setChecked(false);
+                }
                 if (checked) {
                     mLastCheckedPosition = i;
                 } else {
